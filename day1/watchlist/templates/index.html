@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ name }}'watchlist</title>
-
     <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
     
 </head>
 <body>
     <h2>
-        {{ url_for('static',filename='css/style.css') }}
         <p><img class="avatar" src="{{url_for('static',filename='img/故宫.jpg')}}" alt="头像" ></p>
         {{ name }}'watchlist
     </h2>
