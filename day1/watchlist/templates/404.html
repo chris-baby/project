@@ -1,28 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">   
-<head>
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user.name }}'watchlist</title>
-    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
-    
-</head>
-<body>
-    <h2 style="text-align: center;">
-        <img class="avatar" src="{{url_for('static',filename='img/1.png')}}" alt="头像" >
-        <span>{{ user.name }}'watchlist</span>
-    </h2>
-    <ul class="movie-list">
+{% extends 'base.html' %}
 
-    
-        <li>页面走丢啦~~~~ 404
-            <a href="{{ url_for('index') }}">返回主页</a>
-        </li>
-        
-    </ul>
-    <footer>
-    <small>&copy;2020 &nbsp;&nbsp;&nbsp; <a href="#">1903c</a> </small>
-    </footer>
-</body>
-</html>
+{% block content %}
+<ul class="movie-list">
+
+    <li>页面走丢啦~~~~ 404
+        <a href="{{ url_for('index') }}">返回主页</a>
+
+    </li>
+
+</ul>
+{% endblock %}

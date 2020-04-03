@@ -1,6 +1,6 @@
 import os,sys
 
-from flask import Flask,url_for,render_template
+from flask import Flask,url_for,render_template,request,flash,redirect
 from flask_sqlalchemy import SQLAlchemy
 import click
 
@@ -14,6 +14,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(app.root_path,'data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = '1903c_dev'
 
 db = SQLAlchemy(app)
 
@@ -27,13 +28,24 @@ class movie(db.Model):
     title = db.Column(db.String(60))
     year = db.Column(db.String(4))
 
-@app.route('/')
+@app.route('/',methods=["GET","POST"])
 def index():
-    
-    user1 = user.query.first()
-    movies = movie.query.all()
+    if request.method == "POST":
+        #获取表单的数据
+        title = request.form.get("title")
+        year = request.form.get("year")
+        if not title or not year or len(year)>4 or len(title)>60:
+            flash('输入错误')
+            return redirect(url_for('index'))
+        #将数据保存到数据库
+        movie1 = movie(title=title,year=year)#创建记录
+        db.session.add(movie1)
+        db.session.commit()
+        flash('创建成功')
+        return redirect(url_for('index'))
 
-    return render_template("index.html",user=user1,movies=movies)
+    movies = movie.query.all()
+    return render_template("index.html",movies=movies)
 
 #自定义命令
 @app.cli.command()
@@ -63,9 +75,14 @@ def forgr():
     db.session.commit()
     click.echo("导入数据库完成")
 
-
+#错误处理函数
 @app.errorhandler(404)
 def pape_not_found(e):
-    user1=user.query.first()
-    return render_template('404.html',user=user1)
+    return render_template('404.html')
 
+
+#模板上下文处理函数
+@app.context_processor
+def comon_user1():
+    user1 = user.query.first()
+    return dict(user1=user1)
