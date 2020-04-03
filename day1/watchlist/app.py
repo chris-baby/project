@@ -29,15 +29,11 @@ class movie(db.Model):
 
 @app.route('/')
 def index():
-    name = "chris"
-    movies = [
-        {"title":"大赢家","year":"2020"},
-        {"title":"囧妈","year":"2020"},
-        {"title":"战狼","year":"2019"},
-        {"title":"叶问2","year":"2016"},
-        {"title":"疯狂外星人","year":"2019"}
-    ]
-    return render_template("index.html",name=name,movies=movies)
+    
+    user1 = user.query.first()
+    movies = movie.query.all()
+
+    return render_template("index.html",user=user1,movies=movies)
 
 #自定义命令
 @app.cli.command()
@@ -47,3 +43,29 @@ def initdb(drop):
         db.drop_all()
     db.create_all()
     click.echo("初始化数据库完成")
+
+
+@app.cli.command()
+def forgr():
+    name = "chris"
+    movies = [
+            {"title":"大赢家","year":"2020"},
+            {"title":"囧妈","year":"2020"},
+            {"title":"战狼","year":"2019"},
+            {"title":"叶问2","year":"2016"},
+            {"title":"疯狂外星人","year":"2019"}
+        ]
+    user1 = user(name=name)
+    db.session.add(user1)
+    for i in movies:
+        movie1 =movie(title=i["title"],year=i["year"])
+        db.session.add(movie1)
+    db.session.commit()
+    click.echo("导入数据库完成")
+
+
+@app.errorhandler(404)
+def pape_not_found(e):
+    user1=user.query.first()
+    return render_template('404.html',user=user1)
+

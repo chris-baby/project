@@ -13,13 +13,13 @@
         <img class="avatar" src="{{url_for('static',filename='img/1.png')}}" alt="头像" >
         <span>{{ user.name }}'watchlist</span>
     </h2>
-    {# 过滤器 #}
-    <p>总共{{ movies|length }}个电影</p>
     <ul class="movie-list">
 
-    {%for movie in movies%}
-        <li>{{ movie.title }} - {{ movie.year }}</li>
-        {% endfor %}
+    
+        <li>页面走丢啦~~~~ 404
+            <a href="{{ url_for('index') }}">主页</a>
+        </li>
+        
     </ul>
     <footer>
     <small>&copy;2020 &nbsp;&nbsp;&nbsp; <a href="#">1903c</a> </small>
