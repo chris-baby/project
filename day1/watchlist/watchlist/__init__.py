@@ -15,7 +15,8 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(os.path.dirname(app.root_path),'data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = '1903c_dev'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY','dev')
+#需要设置的密钥
 
 db = SQLAlchemy(app)
 
