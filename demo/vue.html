@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue购物车</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container{
+            margin: 0 auto;
+            width: 40%;
+            margin: 100px auto;
+
+        }
+        .removed{
+            color: gray;
+        }
+        .removed label{
+            text-decoration: line-through;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="app">
+        <h2>{{ title }}</h2>
+        <div class="input-group">
+            <input v-model='newItem' v-on:click='showItem' type="text" placeholder="输入你想购买的物品" class='form-control' required>
+            <span class="input-group-btn">
+                <button v-on:click='addItem' type="button" class="btn btn-default">添加到购物车</button>
+            </span>
+        </div>
+        <ul>
+            <li v-for='item in items' v-bind:class="{'removed':item.checked}">
+                <div class="checkbox">
+                    <label for="">
+                        <input type="checkbox" v-model='item.checked'>{{item.text}}
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <!--修改标题-->
+        <div class="footer">
+            <hr>
+            <span>改变你的标题</span>
+            <input v-model='title'> 
+         </div>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    var data = {
+    //声明一个变量 data 
+        items: [
+            {text:'苹果',checked:true},
+            //checked:true 复选框被选中打对勾
+            {text:'电脑',checked:true}
+        ],
+            title:'我的购物车清单',
+            newItem:''
+    }
+    new Vue({
+    //实例化一个Vue对象
+        el:'#app',
+        //el：指定范围
+        data:data,
+        methods:{
+        //里面写js
+            addItem:function(){
+            //定义js的一个函数addTtem
+                var text;
+                // 声明一个变量text
+                text = this.newItem.trim();
+                //获取newItem的值赋给text 
+                if(text){
+                //text为真 
+                    this.items.push({
+                    // 在items重追加数据//push 追加
+                        text:text, 
+                        checked:false
+                        //复选框不加对勾的情况为false
+                    })
+                };
+                this.newItem =''
+                //输入框滞空
+            },
+            showItem:function(){
+            //定义一个函数（输出日志）
+                console.log('dddddd')
+                //终端输出日志ddd
+            }
+            
+        }
+    })
+</script>
+</html>
