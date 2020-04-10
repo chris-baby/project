@@ -4,5 +4,9 @@ __pycache__
 .vscode
 env
 .env
+*.db
+css
+fonts
+node_modules/
 
 
