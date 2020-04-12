@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div id='app' class="container">
   <h2>我的购物车列表</h2>
   <div class="input-group">
     <input type="text" placeholder="输入你想购买的物品" class='js-new-item form-control' required>
