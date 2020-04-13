@@ -40,10 +40,15 @@
             <span>改变你的标题</span>
             <change-title-component></change-title-component>
          </div>
+         <div>{{ item }}平方是 <span v-square='item'></span> </div>
     </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+    //
+    Vue.directive('square',function(el,binding){
+        el.innerHTML = Math.pow(binding.value,2)
+    })
     var data = {
     //声明一个变量 data 
         items: [
@@ -52,7 +57,8 @@
             {text:'电脑',checked:true}
         ],
             title:'我的购物车清单',
-            newItem:''
+            newItem:'',
+            item:10
     }
     //创建列表组件
     var ItemsComponents = Vue.extend({
