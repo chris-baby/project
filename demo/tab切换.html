@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3 v-if="tab==1">首页</h3>
+        <h3 v-else-if='tab==2'>新闻页</h3>
+        <h3 v-else>个人中心</h3>
+
+        <button v-on:click='tabChange' data-id="1">首页</button>
+        <button v-on:click='tabChange' data-id="2">新闻</button>
+        <button v-on:click='tabChange' data-id="3">个人</button>
+    </div>
+
+    <script>
+         app = new Vue({
+             el:'#app',
+             data:{
+                 tab:1
+             },
+             methods: {
+                 tabChange:function(e){
+                     console.log(e)
+                     var tabid = e.target.dataset.id
+                     //获取tabid的值
+                     console.log(app)
+                     console.log(this)
+                     //输出实例化的对象
+                     this.tab = tabid
+                     //this.tab = tabid 跟 app.tab = tabid 等同
+                     
+                     
+
+                 }
+             },
+
+        })
+    </script>
+</body>
+</html>
