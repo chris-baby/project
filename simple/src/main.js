@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import layout from './layout.vue'
+import Layout from './Layout.vue'
 import IndexPage from './pages/index.vue'
-
+import mock from '../mock/mock.js'
 
 Vue.use(VueRouter)
 let router = new VueRouter({
@@ -14,11 +14,12 @@ let router = new VueRouter({
     }
   ]
 })
+
 new Vue({
   el: '#app',
   router,
   components:{
-    layout
+    Layout
   },
-  template: '<layout/>'
+  template: '<Layout/>'
 })

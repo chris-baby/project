@@ -75,6 +75,11 @@ table {
 }
 
 /* layoutT */
+body{
+  background: #f0f2f5;
+  font-size: 14px; 
+  color:#444;
+}
 .app-head {
   background: #363636;
   color: #b2b2b2;
