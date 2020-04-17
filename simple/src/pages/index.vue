@@ -89,6 +89,9 @@ export default {
 </script>
 
 <style scoped>
+*{
+  text-decoration:none;
+}
 .index-wrapper {
   width: 1200px;
   display: flex;
